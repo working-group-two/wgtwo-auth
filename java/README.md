@@ -124,7 +124,7 @@ After login the user is redirected back to https://example.com/oauth/callback wi
 
 On errors these will be:
 - `state` - Should match state passed above
-- `error` - Error enun
+- `error` - Error enum
 - `error_description` - Helpful error description
 
 On success these will be:
