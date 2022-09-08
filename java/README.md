@@ -1,5 +1,26 @@
 # Java library for authentication towards https://api.wgtwo.com
 
+## Install
+
+### Add the JitPack repository to your build file
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+### Add the dependency
+```xml
+<dependency>
+    <groupId>com.github.working-group-two</groupId>
+    <artifactId>wgtwoapis</artifactId>
+    <version>main-SNAPSHOT</version>
+</dependency>
+```
+
 ## Example usage
 ### Java
 
