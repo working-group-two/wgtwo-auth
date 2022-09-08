@@ -1,8 +1,9 @@
 # Java library for authentication towards https://api.wgtwo.com
 
-## Kotlin examples
+## Example usage
+### Java
 
-### Client Credentials flow with gRPC
+#### Client Credentials flow with gRPC
 
 This will inject a up-to-date access token as call credentials to the gRPC stub.
 
@@ -38,7 +39,9 @@ public class Sample {
 }
 ```
 
-### Client Credentials flow with gRPC
+### Kotlin
+
+#### Client Credentials flow with gRPC
 
 This will inject a up-to-date access token as call credentials to the gRPC stub.
 
@@ -72,13 +75,13 @@ class Sample {
 }
 ```
 
-### Authorization Code flow
+#### Authorization Code flow
 When using the authorization code flow, `callbackUri` must be set.
 
 If the scope `openid` is set, a openId token will be returned.
 The `nonce` claim will include the nonce you set in the parameters.
 
-#### Create authorization url
+##### Create authorization url
 ```kotlin
 val clientId = "86b76cb5-caf3-4c1c-bdfe-8b3454f580b8"
 val clientSecret = "RzvcbQDfrkOb5ElvPuxA49oA8odBZfvj5MK1r2AdFuV99EGvL4aJvARUg637p3QqqgrU6gyG"
@@ -94,7 +97,7 @@ var state = "my-state"
 var authorizationUrl = wgtwoAuth.authorizationCode.authorizationUrl(scope, nonce, state, Prompt.DEFAULT)
 ```
 
-#### Redirect user to authorization url
+##### Redirect user to authorization url
 Redirect user to ${authorizationUrl} in browser
 After login the user is redirected back to https://example.com/oauth/callback with query parameters:
 
@@ -110,7 +113,7 @@ On success these will be:
 
 Note that according to the OAuth 2.0 spec, the granted scope may differ from the requested scopes.
 
-#### Exchange code for token
+##### Exchange code for token
 
 ```
 var parameters = splitQueryParams("https://example.com/oauth/callback?state=my-state&code=(...)&scope=(...)
