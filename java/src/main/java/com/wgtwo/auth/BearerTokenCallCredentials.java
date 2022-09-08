@@ -12,7 +12,7 @@ public class BearerTokenCallCredentials extends CallCredentials {
     private final Supplier<String> tokenSource;
 
     @NotNull
-    public BearerTokenCallCredentials(@NotNull Supplier<String> tokenSource) {
+    public BearerTokenCallCredentials(Supplier<String> tokenSource) {
         this.tokenSource = tokenSource;
     }
 

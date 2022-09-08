@@ -20,12 +20,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class WgtwoAuth implements Closeable {
     private final OAuth20Service service;
-
     private final Clock clock;
-
     public final ClientCredentials clientCredentials = new ClientCredentials();
     public final AuthorizationCode authorizationCode = new AuthorizationCode();
-
 
     private WgtwoAuth(String clientId, String clientSecret, String callback, Clock clock, String hostname, Boolean debug) {
         ServiceBuilder builder = new ServiceBuilder(clientId)

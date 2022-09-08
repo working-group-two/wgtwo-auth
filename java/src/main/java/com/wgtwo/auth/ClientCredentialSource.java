@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Returns a up-to-date client credentials token.
- *
+ * Returns an up-to-date client credentials token.
+ * <p>
  * Will replace the cached token if expired or close (two minutes) to expiry.
  */
 public class ClientCredentialSource {

@@ -9,8 +9,7 @@ public class Metadata {
     private final String openIdToken;
     private DecodedJWT jwt = null;
 
-    @NotNull
-    public Metadata(@NotNull String openIdToken) {
+    public Metadata(String openIdToken) {
         this.openIdToken = openIdToken;
     }
 

@@ -1,14 +1,12 @@
 package com.wgtwo.auth.model;
 
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
 
 public class AccessTokenException extends RuntimeException {
     private final String error;
     private final String description;
 
-    @NotNull
-    public AccessTokenException(@NotNull String error, @NotNull String description) {
+    public AccessTokenException(String error, String description) {
         super("Could not get token: " + error + " => " + description);
         this.error = error;
         this.description = description;

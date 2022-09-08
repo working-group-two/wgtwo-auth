@@ -1,6 +1,8 @@
-package com.wgtwo.auth.model;
+package com.wgtwo.auth;
 
 import com.wgtwo.auth.WgtwoAuth;
+import com.wgtwo.auth.model.AccessTokenException;
+import com.wgtwo.auth.model.Token;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;

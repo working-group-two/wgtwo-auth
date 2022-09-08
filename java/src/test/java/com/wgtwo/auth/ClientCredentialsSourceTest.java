@@ -1,4 +1,4 @@
-package com.wgtwo.auth.model;
+package com.wgtwo.auth;
 
 import com.wgtwo.api.v1.events.EventsProto;
 import com.wgtwo.api.v1.subscription.SubscriptionEventServiceGrpc;
@@ -6,6 +6,7 @@ import com.wgtwo.api.v1.subscription.SubscriptionEventsProto;
 import com.wgtwo.api.v1.subscription.SubscriptionEventsProto.StreamHandsetChangeEventsResponse;
 import com.wgtwo.auth.ClientCredentialSource;
 import com.wgtwo.auth.WgtwoAuth;
+import com.wgtwo.auth.model.Token;
 import io.grpc.CallCredentials;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
