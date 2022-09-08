@@ -40,7 +40,7 @@ public class WgtwoAuth implements Closeable {
         return new WgtwoAuthBuilder(clientId, clientSecret);
     }
 
-    public ClientCredentialSource clientCredentialSource(String scope) {
+    public ClientCredentialSource clientCredentialSource(@Nullable String scope) {
         return new ClientCredentialSource(clock, () -> clientCredentials.accessToken(scope));
     }
 
@@ -75,7 +75,7 @@ public class WgtwoAuth implements Closeable {
         }
 
         @NotNull
-        public WgtwoAuthBuilder debug() {
+        public WgtwoAuthBuilder enableDebug() {
             this.debug = true;
             return this;
         }
@@ -93,6 +93,8 @@ public class WgtwoAuth implements Closeable {
     }
 
     public class ClientCredentials {
+
+        @NotNull
         public Token accessToken(@Nullable String scope) throws AccessTokenException {
             try {
                 OAuth2AccessToken response = service.getAccessTokenClientCredentialsGrant(scope);
@@ -125,6 +127,7 @@ public class WgtwoAuth implements Closeable {
                     .build();
         }
 
+        @NotNull
         public Token accessToken(@NotNull String code) {
             try {
                 Instant now = clock.instant();

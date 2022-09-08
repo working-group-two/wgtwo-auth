@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Returns an up-to-date client credentials token.
  * <p>
- * Will replace the cached token if expired or close (two minutes) to expiry.
+ * Will replace the cached token if expired or will expire within two minutes.
  */
 public class ClientCredentialSource {
     private final Clock clock;

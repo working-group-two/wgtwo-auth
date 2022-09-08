@@ -1,6 +1,7 @@
 package com.wgtwo.auth.model;
 
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 public class AccessTokenException extends RuntimeException {
     private final String error;
@@ -12,10 +13,12 @@ public class AccessTokenException extends RuntimeException {
         this.description = description;
     }
 
+    @NotNull
     public String getError() {
         return error;
     }
 
+    @NotNull
     public String getDescription() {
         return description;
     }

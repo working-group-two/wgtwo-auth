@@ -11,8 +11,7 @@ public class BearerTokenCallCredentials extends CallCredentials {
     private static final Metadata.Key<String> key = Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER);
     private final Supplier<String> tokenSource;
 
-    @NotNull
-    public BearerTokenCallCredentials(Supplier<String> tokenSource) {
+    public BearerTokenCallCredentials(@NotNull Supplier<String> tokenSource) {
         this.tokenSource = tokenSource;
     }
 

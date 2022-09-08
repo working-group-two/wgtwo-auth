@@ -1,5 +1,7 @@
 package com.wgtwo.auth;
 
+import org.jetbrains.annotations.NotNull;
+
 public enum Prompt {
     /**
      * Show login, even if there is an existing session
@@ -27,9 +29,10 @@ public enum Prompt {
     DEFAULT(""),
     ;
 
+    @NotNull
     public final String value;
 
-    Prompt(String value) {
+    Prompt(@NotNull String value) {
         this.value = value;
     }
 }
