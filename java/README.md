@@ -16,8 +16,8 @@
 ```xml
 <dependency>
     <groupId>com.github.working-group-two</groupId>
-    <artifactId>wgtwoapis</artifactId>
-    <version>main-SNAPSHOT</version>
+    <artifactId>wgtwo-auth</artifactId>
+    <version>f216e4e463</version>
 </dependency>
 ```
 
