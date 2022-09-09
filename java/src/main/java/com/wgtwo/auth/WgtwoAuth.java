@@ -115,6 +115,10 @@ public class WgtwoAuth implements Closeable {
                 @NotNull String state,
                 @NotNull Prompt prompt
         ) {
+            if (state.length() < 8) {
+                throw new IllegalArgumentException("State must be at least 8 chars");
+            }
+
             Map<String, String> params = new HashMap<>();
             params.put("nonce", nonce);
             if (prompt != Prompt.DEFAULT) {

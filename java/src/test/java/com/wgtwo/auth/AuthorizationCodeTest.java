@@ -45,7 +45,8 @@ class AuthorizationCodeTest {
 
         assertThat(authorizationUrl).isEqualTo(
                 "http://127.0.0.1:" + mockServer.getLocalPort() + "/oauth2/auth" +
-                        "?nonce=my-nonce&response_type=code" +
+                        "?nonce=my-nonce" +
+                        "&response_type=code" +
                         "&client_id=clientId" +
                         "&redirect_uri=https%3A%2F%2Fexample.com%2Foauth%2Fcallback" +
                         "&scope=phone%20openid" +
