@@ -2,22 +2,12 @@
 
 ## Install
 
-### Add the JitPack repository to your build file
-```xml
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
-
-### Add the dependency
+### Maven
 ```xml
 <dependency>
-    <groupId>com.github.working-group-two</groupId>
-    <artifactId>wgtwo-auth</artifactId>
-    <version>837b208cf46bd522093949adaa3b57cc91284bb6</version>
+    <groupId>com.wgtwo.api</groupId>
+    <artifactId>auth</artifactId>
+    <version>0.0.3</version>
 </dependency>
 ```
 
