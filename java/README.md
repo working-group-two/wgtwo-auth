@@ -17,7 +17,7 @@
 <dependency>
     <groupId>com.github.working-group-two</groupId>
     <artifactId>wgtwo-auth</artifactId>
-    <version>f216e4e463</version>
+    <version>837b208cf46bd522093949adaa3b57cc91284bb6</version>
 </dependency>
 ```
 
