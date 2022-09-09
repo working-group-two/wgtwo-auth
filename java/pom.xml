@@ -10,6 +10,7 @@
 
     <name>wgtwo auth</name>
     <url>https://wgtwo.com</url>
+    <description>Authorization SDK for wgtwo</description>
 
     <properties>
         <java.version>1.8</java.version>
