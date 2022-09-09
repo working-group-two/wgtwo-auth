@@ -1,15 +1,10 @@
 package com.wgtwo.auth;
 
 import com.google.common.io.Resources;
-import com.wgtwo.auth.Prompt;
-import com.wgtwo.auth.WgtwoAuth;
 import com.wgtwo.auth.model.Token;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneOffset;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,7 +79,7 @@ class AuthorizationCodeTest {
                 .oauthServer("http://127.0.0.1:" + mockServer.getLocalPort())
                 .build();
 
-        Token token = wgtwoAuth.authorizationCode.accessToken("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
+        Token token = wgtwoAuth.authorizationCode.token("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
         assertThat(token.getMetadata()).isNull();
         assertThat(token.getAccessToken()).isEqualTo("ih_iwZar30-sjSJiJkBRsNePNZ_MGjhmhgAwMg6tLr0.YzzYG3UIUOb9W8XFZkUQ1S0OuIJE5mvmSGsO1cBx_RE");
         assertThat(token.getScope()).isEqualTo("phone");
@@ -110,7 +105,7 @@ class AuthorizationCodeTest {
                 .callbackUri("https://localhost:30000/oauth/callback")
                 .oauthServer("http://127.0.0.1:" + mockServer.getLocalPort())
                 .build();
-        Token token = wgtwoAuth.authorizationCode.accessToken("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
+        Token token = wgtwoAuth.authorizationCode.token("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
 
         assertThat(token.getAccessToken()).isEqualTo("ih_iwZar30-sjSJiJkBRsNePNZ_MGjhmhgAwMg6tLr0.YzzYG3UIUOb9W8XFZkUQ1S0OuIJE5mvmSGsO1cBx_RE");
         assertThat(token.getScope()).isEqualTo("phone openid");

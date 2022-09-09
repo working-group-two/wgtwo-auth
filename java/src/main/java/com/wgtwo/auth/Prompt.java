@@ -17,13 +17,13 @@ public enum Prompt {
     LOGIN_AND_CONSENT("login consent"),
     /**
      * Do not show login or consent.
-     *
+     * <p>
      * If no session and consent exists, fail the request.
      */
     NONE("none"),
     /**
      * Default setting.
-     *
+     * <p>
      * Shows login and consent depending on session and consent available.
      */
     DEFAULT(""),

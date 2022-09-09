@@ -1,6 +1,5 @@
 package com.wgtwo.auth;
 
-import com.wgtwo.auth.WgtwoAuth;
 import com.wgtwo.auth.model.AccessTokenException;
 import com.wgtwo.auth.model.Token;
 import java.time.Clock;
@@ -53,7 +52,7 @@ class ClientCredentialsTest {
                 .clock(clock)
                 .oauthServer("http://127.0.0.1:" + mockServer.getLocalPort())
                 .build();
-        Token token = wgtwoAuth.clientCredentials.accessToken("subscription.handset_details:read");
+        Token token = wgtwoAuth.clientCredentials.token("subscription.handset_details:read");
         assertThat(token.getAccessToken()).isEqualTo("bwZyW0-M6RXOqInIZej2whGk0DEtuM8XvP35bPbE-xw.D6FkDLByvChH3UNdTSmzok7Q8ZuxpDVnpQgpddc_GEU");
         assertThat(token.getExpiry()).isEqualTo(clock.instant().plusSeconds(3599));
         assertThat(token.getScope()).isEqualTo("subscription.handset_details:read");
@@ -77,7 +76,7 @@ class ClientCredentialsTest {
                 .oauthServer("http://127.0.0.1:" + mockServer.getLocalPort())
                 .build();
 
-        assertThatThrownBy(() -> wgtwoAuth.clientCredentials.accessToken(null))
+        assertThatThrownBy(() -> wgtwoAuth.clientCredentials.token(null))
                 .isInstanceOf(AccessTokenException.class)
                 .matches(e -> Objects.equals(((AccessTokenException) e).getError(), "invalid_client"));
     }

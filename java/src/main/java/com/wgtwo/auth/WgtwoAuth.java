@@ -40,10 +40,6 @@ public class WgtwoAuth implements Closeable {
         return new WgtwoAuthBuilder(clientId, clientSecret);
     }
 
-    public ClientCredentialSource clientCredentialSource(@Nullable String scope) {
-        return new ClientCredentialSource(clock, () -> clientCredentials.accessToken(scope));
-    }
-
     @Override
     public void close() throws IOException {
         service.close();
@@ -95,7 +91,7 @@ public class WgtwoAuth implements Closeable {
     public class ClientCredentials {
 
         @NotNull
-        public Token accessToken(@Nullable String scope) throws AccessTokenException {
+        public Token token(@Nullable String scope) throws AccessTokenException {
             try {
                 OAuth2AccessToken response = service.getAccessTokenClientCredentialsGrant(scope);
                 Instant expiry = clock.instant().plusSeconds(response.getExpiresIn());
@@ -105,6 +101,10 @@ public class WgtwoAuth implements Closeable {
             } catch (IOException | ExecutionException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
+        }
+
+        public ClientCredentialSource tokenSource(@Nullable String scope) {
+            return new ClientCredentialSource(clock, () -> token(scope));
         }
     }
 
@@ -128,24 +128,40 @@ public class WgtwoAuth implements Closeable {
         }
 
         @NotNull
-        public Token accessToken(@NotNull String code) {
+        public Token token(@NotNull String code) {
+            Instant now = clock.instant();
             try {
-                Instant now = clock.instant();
                 OpenIdOAuth2AccessToken response = (OpenIdOAuth2AccessToken) service.getAccessToken(code);
-                String openIdToken = response.getOpenIdToken();
-                Metadata metadata;
-                if (openIdToken != null) {
-                    metadata = new Metadata((openIdToken));
-                } else {
-                    metadata = null;
-                }
-                Instant expiry = now.plusSeconds(response.getExpiresIn());
-                return new Token(response.getAccessToken(), "", expiry, response.getScope(), metadata);
+                return createToken(now, response);
             } catch (OAuth2AccessTokenErrorResponse e) {
                 throw new AccessTokenException(e.getError().getErrorString(), e.getErrorDescription());
             } catch (IOException | ExecutionException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
+        }
+
+        public Token refresh(@NotNull String refreshToken) {
+            Instant now = clock.instant();
+            try {
+                OpenIdOAuth2AccessToken response = (OpenIdOAuth2AccessToken) service.refreshAccessToken(refreshToken);
+                return createToken(now, response);
+            } catch (OAuth2AccessTokenErrorResponse e) {
+                throw new AccessTokenException(e.getError().getErrorString(), e.getErrorDescription());
+            } catch (IOException | ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        private Token createToken(Instant now, OpenIdOAuth2AccessToken token) {
+            String openIdToken = token.getOpenIdToken();
+            Metadata metadata;
+            if (openIdToken != null) {
+                metadata = new Metadata((openIdToken));
+            } else {
+                metadata = null;
+            }
+            Instant expiry = now.plusSeconds(token.getExpiresIn());
+            return new Token(token.getAccessToken(), "", expiry, token.getScope(), metadata);
         }
     }
 }

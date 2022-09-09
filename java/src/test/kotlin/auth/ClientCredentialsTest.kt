@@ -35,7 +35,7 @@ class ClientCredentialsTest {
             .oauthServer("http://127.0.0.1:" + mockServer.localPort)
             .build()
 
-        val clientCredentialSource = wgtwoAuth.clientCredentialSource("subscription.handset_details:read")
+        val clientCredentialSource = wgtwoAuth.clientCredentials.tokenSource("subscription.handset_details:read")
 
         val token = clientCredentialSource.token()
         assertThat(token.accessToken)
@@ -56,7 +56,7 @@ class ClientCredentialsTest {
         ).respond(
             HttpResponse.response()
                 .withStatusCode(200)
-                .withBody(javaClass.getResource("/access-token-with-id-token.json").readText())
+                .withBody(javaClass.getResource("/access-token-with-id-token.json")!!.readText())
                 .withDelay(Delay.milliseconds(250))
         )
     }

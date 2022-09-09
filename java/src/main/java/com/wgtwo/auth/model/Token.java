@@ -56,7 +56,7 @@ public class Token {
         if (o == null || getClass() != o.getClass()) return false;
         Token token = (Token) o;
         return Objects.equals(accessToken, token.accessToken)
-        && Objects.equals(refreshToken, token.refreshToken)
+                && Objects.equals(refreshToken, token.refreshToken)
                 && Objects.equals(expiry, token.expiry)
                 && Objects.equals(scope, token.scope);
     }
