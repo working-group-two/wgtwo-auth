@@ -161,7 +161,7 @@ public class WgtwoAuth implements Closeable {
                 metadata = null;
             }
             Instant expiry = now.plusSeconds(token.getExpiresIn());
-            return new Token(token.getAccessToken(), "", expiry, token.getScope(), metadata);
+            return new Token(token.getAccessToken(), token.getRefreshToken(), expiry, token.getScope(), metadata);
         }
     }
 }
