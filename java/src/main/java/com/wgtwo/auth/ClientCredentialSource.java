@@ -23,7 +23,7 @@ public class ClientCredentialSource {
     }
 
     @NotNull
-    public synchronized Token token() {
+    public synchronized Token fetchToken() {
         if (isExpired(cached)) {
             cached = tokenSupplier.get();
         }
@@ -31,7 +31,7 @@ public class ClientCredentialSource {
     }
 
     public BearerTokenCallCredentials callCredentials() {
-        return new BearerTokenCallCredentials(token()::getAccessToken);
+        return new BearerTokenCallCredentials(fetchToken()::getAccessToken);
     }
 
     private boolean isExpired(Token token) {

@@ -91,7 +91,7 @@ public class WgtwoAuth implements Closeable {
     public class ClientCredentials {
 
         @NotNull
-        public Token token(@Nullable String scope) throws AccessTokenException {
+        public Token fetchToken(@Nullable String scope) throws AccessTokenException {
             try {
                 OAuth2AccessToken response = service.getAccessTokenClientCredentialsGrant(scope);
                 Instant expiry = clock.instant().plusSeconds(response.getExpiresIn());
@@ -103,13 +103,13 @@ public class WgtwoAuth implements Closeable {
             }
         }
 
-        public ClientCredentialSource tokenSource(@Nullable String scope) {
-            return new ClientCredentialSource(clock, () -> token(scope));
+        public ClientCredentialSource newTokenSource(@Nullable String scope) {
+            return new ClientCredentialSource(clock, () -> fetchToken(scope));
         }
     }
 
     public class AuthorizationCode {
-        public String authorizationUrl(
+        public String createAuthorizationUrl(
                 @NotNull String scope,
                 @NotNull String nonce,
                 @NotNull String state,
@@ -128,7 +128,7 @@ public class WgtwoAuth implements Closeable {
         }
 
         @NotNull
-        public Token token(@NotNull String code) {
+        public Token fetchToken(@NotNull String code) {
             Instant now = clock.instant();
             try {
                 OpenIdOAuth2AccessToken response = (OpenIdOAuth2AccessToken) service.getAccessToken(code);
@@ -140,7 +140,7 @@ public class WgtwoAuth implements Closeable {
             }
         }
 
-        public Token refresh(@NotNull String refreshToken) {
+        public Token refreshToken(@NotNull String refreshToken) {
             Instant now = clock.instant();
             try {
                 OpenIdOAuth2AccessToken response = (OpenIdOAuth2AccessToken) service.refreshAccessToken(refreshToken);

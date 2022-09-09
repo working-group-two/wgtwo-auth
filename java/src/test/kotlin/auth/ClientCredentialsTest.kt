@@ -35,9 +35,9 @@ class ClientCredentialsTest {
             .oauthServer("http://127.0.0.1:" + mockServer.localPort)
             .build()
 
-        val clientCredentialSource = wgtwoAuth.clientCredentials.tokenSource("subscription.handset_details:read")
+        val clientCredentialSource = wgtwoAuth.clientCredentials.newTokenSource("subscription.handset_details:read")
 
-        val token = clientCredentialSource.token()
+        val token = clientCredentialSource.fetchToken()
         assertThat(token.accessToken)
             .isEqualTo("ih_iwZar30-sjSJiJkBRsNePNZ_MGjhmhgAwMg6tLr0.YzzYG3UIUOb9W8XFZkUQ1S0OuIJE5mvmSGsO1cBx_RE")
     }

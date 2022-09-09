@@ -41,7 +41,7 @@ class AuthorizationCodeTest {
         String scope = "phone openid";
         String nonce = "my-nonce";
         String state = "my-state";
-        String authorizationUrl = wgtwoAuth.authorizationCode.authorizationUrl(scope, nonce, state, Prompt.DEFAULT);
+        String authorizationUrl = wgtwoAuth.authorizationCode.createAuthorizationUrl(scope, nonce, state, Prompt.DEFAULT);
 
         assertThat(authorizationUrl).isEqualTo(
                 "http://127.0.0.1:" + mockServer.getLocalPort() + "/oauth2/auth" +
@@ -79,7 +79,7 @@ class AuthorizationCodeTest {
                 .oauthServer("http://127.0.0.1:" + mockServer.getLocalPort())
                 .build();
 
-        Token token = wgtwoAuth.authorizationCode.token("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
+        Token token = wgtwoAuth.authorizationCode.fetchToken("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
         assertThat(token.getMetadata()).isNull();
         assertThat(token.getAccessToken()).isEqualTo("ih_iwZar30-sjSJiJkBRsNePNZ_MGjhmhgAwMg6tLr0.YzzYG3UIUOb9W8XFZkUQ1S0OuIJE5mvmSGsO1cBx_RE");
         assertThat(token.getScope()).isEqualTo("phone");
@@ -105,7 +105,7 @@ class AuthorizationCodeTest {
                 .callbackUri("https://localhost:30000/oauth/callback")
                 .oauthServer("http://127.0.0.1:" + mockServer.getLocalPort())
                 .build();
-        Token token = wgtwoAuth.authorizationCode.token("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
+        Token token = wgtwoAuth.authorizationCode.fetchToken("7CjFbYFYpr9IJ0CUJTlKZvt3kGr1k2fY47zWm8_Jn2o.hw8mJQKNVXU2jRprG-2bv4ppw8DVXzo4COQbXgKTbN0");
 
         assertThat(token.getAccessToken()).isEqualTo("ih_iwZar30-sjSJiJkBRsNePNZ_MGjhmhgAwMg6tLr0.YzzYG3UIUOb9W8XFZkUQ1S0OuIJE5mvmSGsO1cBx_RE");
         assertThat(token.getScope()).isEqualTo("phone openid");

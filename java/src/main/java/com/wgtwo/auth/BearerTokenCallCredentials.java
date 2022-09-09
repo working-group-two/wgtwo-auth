@@ -31,6 +31,5 @@ public class BearerTokenCallCredentials extends CallCredentials {
     }
 
     @Override
-    public void thisUsesUnstableApi() {
-    }
+    public void thisUsesUnstableApi() {}
 }

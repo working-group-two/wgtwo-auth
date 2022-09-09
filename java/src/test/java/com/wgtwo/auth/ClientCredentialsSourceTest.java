@@ -60,10 +60,10 @@ class ClientCredentialsSourceTest {
                 .oauthServer("http://127.0.0.1:" + mockServer.getLocalPort())
                 .build();
 
-        ClientCredentialSource clientCredentialSource = wgtwoAuth.clientCredentials.tokenSource("subscription.handset_details:read");
+        ClientCredentialSource clientCredentialSource = wgtwoAuth.clientCredentials.newTokenSource("subscription.handset_details:read");
 
         for (int i = 0; i < 1000; i++) {
-            Token token = clientCredentialSource.token();
+            Token token = clientCredentialSource.fetchToken();
             assertThat(token.getAccessToken()).isEqualTo("my-access-token");
         }
     }
@@ -75,7 +75,7 @@ class ClientCredentialsSourceTest {
         String clientSecret = envOrEmpty("CLIENT_SECRET");
         WgtwoAuth wgtwoAuth = WgtwoAuth.builder(clientId, clientSecret).build();
 
-        ClientCredentialSource clientCredentialSource = wgtwoAuth.clientCredentials.tokenSource("subscription.handset_details:read");
+        ClientCredentialSource clientCredentialSource = wgtwoAuth.clientCredentials.newTokenSource("subscription.handset_details:read");
         CallCredentials callCredentials = clientCredentialSource.callCredentials();
 
         ManagedChannel channel = ManagedChannelBuilder.forTarget("sandbox.api.wgtwo.com:443").build();

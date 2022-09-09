@@ -8,7 +8,7 @@ import io.grpc.ManagedChannelBuilder
 private val clientId = System.getenv("CLIENT_ID")
 private val clientSecret = System.getenv("CLIENT_SECRET")
 private val wgtwoAuth = WgtwoAuth.builder(clientId, clientSecret).build()
-private val clientCredentialSource = wgtwoAuth.clientCredentials.tokenSource("sms.text:send_to_subscriber")
+private val clientCredentialSource = wgtwoAuth.clientCredentials.newTokenSource("sms.text:send_to_subscriber")
 private val callCredentials = clientCredentialSource.callCredentials()
 
 fun main() {

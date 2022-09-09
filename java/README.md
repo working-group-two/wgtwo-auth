@@ -21,7 +21,55 @@
 </dependency>
 ```
 
-## Example usage
+## Usage
+
+### Setup
+```kotlin
+import com.wgtwo.auth.WgtwoAuth
+
+val clientId = System.getenv("CLIENT_ID")
+val clientSecret = System.getenv("CLIENT_SECRET")
+val wgtwoAuth = WgtwoAuth.builder(clientId, clientSecret).build()
+```
+
+### Client Credentials flow
+```kotlin
+// Get token
+val token = wgtwoAuth.clientCredentials.fetchToken("phone sms.text:send_to_subscriber")
+
+// Get token source (cache with automatic refresh)
+val tokenSource = wgtwoAuth.clientCredentials.newTokenSource("phone sms.text:send_to_subscriber")
+val cachedToken = tokenSource.fetchToken()
+
+// Create call credentials for gRPC
+val callCredentials = tokenSource.callCredentials()
+
+// Include call credentials in gRPC stub
+val stubWithCallCredentials = SmsServiceGrpc.newBlockingStub(channel).withCallCredentials(callCredentials)
+```
+
+### Authorization Code flow
+````kotlin
+val scope = "offline_access phone sms.text:send_to_subscriber"
+val nonce = "random-nonce"
+val state = "random-state"
+
+// Shows login and consent depending on session and consent available
+val prompt = Prompt.DEFAULT
+
+// Redirect user to the authorization URL
+val authorizationUrl: String = wgtwoAuth.authorizationCode.createAuthorizationUrl(scope, nonce, state, prompt)
+
+// The user will be redirected back to you. If successful, this will have `code` as a query param
+val token: Token = wgtwoAuth.authorizationCode.fetchToken("code from query param")
+
+val accessToken: String = token.accessToken
+val refreshToken: String? = token.refreshToken
+
+val newToken: Token = wgtwoAuth.authorizationCode.refreshToken(refreshToken!!)
+````
+
+## Examples
 ### Java
 
 #### Client Credentials flow with gRPC
