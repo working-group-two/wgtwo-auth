@@ -5,7 +5,7 @@
 
     <groupId>com.wgtwo.api</groupId>
     <artifactId>auth</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>wgtwo auth</name>
@@ -27,7 +27,7 @@
         <connection>scm:git:git@github.com:working-group-two/wgtwo-auth.git</connection>
         <developerConnection>scm:git:[push=]git@github.com:working-group-two/wgtwo-auth.git[fetch=]git@github.com:working-group-two/wgtwo-auth.git</developerConnection>
         <url>https://github.com/working-group-two/wgtwo-auth.git</url>
-        <tag>v0.0.1</tag>
+        <tag>v1.6.0</tag>
     </scm>
 
     <distributionManagement>
