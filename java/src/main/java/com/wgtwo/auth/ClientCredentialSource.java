@@ -2,6 +2,7 @@ package com.wgtwo.auth;
 
 import com.wgtwo.auth.model.Token;
 import java.time.Clock;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
  * Will replace the cached token if expired or will expire within two minutes.
  */
 public class ClientCredentialSource {
+    private final static Duration REFRESH_TOKEN_PERIOD = Duration.ofMinutes(2);
     private final Clock clock;
     private final Supplier<Token> tokenSupplier;
 
@@ -37,6 +39,6 @@ public class ClientCredentialSource {
     private boolean isExpired(Token token) {
         Instant now = clock.instant();
         Instant expiry = token.getExpiry();
-        return now.minusSeconds(120).isAfter(expiry);
+        return now.plus(REFRESH_TOKEN_PERIOD).isAfter(expiry);
     }
 }
