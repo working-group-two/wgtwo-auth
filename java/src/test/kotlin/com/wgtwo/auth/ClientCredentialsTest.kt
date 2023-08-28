@@ -1,6 +1,5 @@
-package auth
+package com.wgtwo.auth
 
-import com.wgtwo.auth.WgtwoAuth
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -29,9 +28,7 @@ class ClientCredentialsTest {
     fun `should obtain access token via client credentials flow`() {
         setupMockServer()
 
-        val clientId = "86b76cb5-caf3-4c1c-bdfe-8b3454f580b8"
-        val clientSecret = "RzvcbQDfrkOb5ElvPuxA49oA8odBZfvj5MK1r2AdFuV99EGvL4aJvARUg637p3QqqgrU6gyG"
-        val wgtwoAuth = WgtwoAuth.builder(clientId, clientSecret)
+        val wgtwoAuth = WgtwoAuth.builder(CLIENT_ID, CLIENT_SECRET)
             .oauthServer("http://127.0.0.1:" + mockServer.localPort)
             .build()
 
@@ -49,7 +46,7 @@ class ClientCredentialsTest {
                 .withPath("/oauth2/token")
                 .withHeader(
                     "Authorization",
-                    "Basic ODZiNzZjYjUtY2FmMy00YzFjLWJkZmUtOGIzNDU0ZjU4MGI4OlJ6dmNiUURmcmtPYjVFbHZQdXhBNDlvQThvZEJaZnZqNU1LMXIyQWRGdVY5OUVHdkw0YUp2QVJVZzYzN3AzUXFxZ3JVNmd5Rw==",
+                    "Basic ${base64("$CLIENT_ID:$CLIENT_SECRET")}",
                 )
                 .withBody("scope=subscription.handset_details%3Aread&grant_type=client_credentials"),
             Times.exactly(1),
@@ -59,5 +56,12 @@ class ClientCredentialsTest {
                 .withBody(javaClass.getResource("/access-token-with-id-token.json")!!.readText())
                 .withDelay(Delay.milliseconds(250)),
         )
+    }
+
+    companion object {
+        const val CLIENT_ID = "86b76cb5-caf3-4c1c-bdfe-8b3454f580b8"
+        const val CLIENT_SECRET = "RzvcbQDfrkOb5ElvPuxA49oA8odBZfvj5MK1r2AdFuV99EGvL4aJvARUg637p3QqqgrU6gyG"
+
+        private fun base64(value: String): String = java.util.Base64.getEncoder().encodeToString(value.toByteArray())
     }
 }

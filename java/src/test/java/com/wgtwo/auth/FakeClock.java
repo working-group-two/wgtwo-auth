@@ -7,34 +7,34 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 public class FakeClock extends Clock {
-    private Instant instant;
-    private ZoneId zoneId = ZoneOffset.UTC;
+  private Instant instant;
+  private ZoneId zoneId = ZoneOffset.UTC;
 
-    public FakeClock(Instant instant) {
-        this.instant = instant;
-    }
+  public FakeClock(Instant instant) {
+    this.instant = instant;
+  }
 
-    public static FakeClock forInstant(Instant instant) {
-        return new FakeClock(instant);
-    }
+  public static FakeClock forInstant(Instant instant) {
+    return new FakeClock(instant);
+  }
 
-    @Override
-    public ZoneId getZone() {
-        return zoneId;
-    }
+  @Override
+  public ZoneId getZone() {
+    return zoneId;
+  }
 
-    @Override
-    public Clock withZone(ZoneId zone) {
-        this.zoneId = zone;
-        return this;
-    }
+  @Override
+  public Clock withZone(ZoneId zone) {
+    this.zoneId = zone;
+    return this;
+  }
 
-    @Override
-    public Instant instant() {
-        return instant;
-    }
+  @Override
+  public Instant instant() {
+    return instant;
+  }
 
-    public synchronized void tick(Duration duration) {
-        instant = instant.plus(duration);
-    }
+  public synchronized void tick(Duration duration) {
+    instant = instant.plus(duration);
+  }
 }
