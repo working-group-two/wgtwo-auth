@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wgtwo.api</groupId>
@@ -15,18 +16,24 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <scribejava.version>8.3.1</scribejava.version>
+        <scribejava.version>8.3.3</scribejava.version>
         <grpc.version>1.57.2</grpc.version>
-        <java-jwt.version>4.0.0</java-jwt.version>
-        <annotations.version>23.0.0</annotations.version>
-        <kotlin.version>1.7.10</kotlin.version>
+        <java-jwt.version>4.4.0</java-jwt.version>
+        <annotations.version>24.0.1</annotations.version>
+        <kotlin.version>1.9.10</kotlin.version>
         <wgtwo.version>1.8.2</wgtwo.version>
         <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+        <jackson.version>2.15.2</jackson.version>
+        <junit-jupiter.version>5.10.0</junit-jupiter.version>
+        <assertj.version>3.24.2</assertj.version>
+        <slf4j.version>2.0.7</slf4j.version>
     </properties>
 
     <scm>
         <connection>scm:git:git@github.com:working-group-two/wgtwo-auth.git</connection>
-        <developerConnection>scm:git:[push=]git@github.com:working-group-two/wgtwo-auth.git[fetch=]git@github.com:working-group-two/wgtwo-auth.git</developerConnection>
+        <developerConnection>
+            scm:git:[push=]git@github.com:working-group-two/wgtwo-auth.git[fetch=]git@github.com:working-group-two/wgtwo-auth.git
+        </developerConnection>
         <url>https://github.com/working-group-two/wgtwo-auth.git</url>
         <tag>v0.0.4</tag>
     </scm>
@@ -56,7 +63,15 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.13.4</version>
+                <version>${jackson.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-bom</artifactId>
+                <version>${kotlin.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -118,31 +133,30 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.0</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.10.0</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.23.1</version>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.0</version>
+            <version>${slf4j.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -167,8 +181,10 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>${maven-release-plugin.version}</version>
                 <configuration>
-                    <scmCommentPrefix>[RELEASE] </scmCommentPrefix>
-                    <tagNameFormat>v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</tagNameFormat>
+                    <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
+                    <tagNameFormat>
+                        v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
+                    </tagNameFormat>
                 </configuration>
             </plugin>
             <plugin>
@@ -198,7 +214,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -237,7 +253,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
+                <version>3.1.2</version>
             </plugin>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -263,7 +279,7 @@
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
