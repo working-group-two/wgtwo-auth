@@ -14,7 +14,9 @@ repos:
     rev: v0.9.0
     hooks:
       - id: detekt
+        exclude: "java/.mvn/.*"
       - id: google-java-formatter-jdk11
+        exclude: "java/.mvn/.*"
         args: [--replace, --set-exit-if-changed]
       - id: ktlint
         args: [--format]
