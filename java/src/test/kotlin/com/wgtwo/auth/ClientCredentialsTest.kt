@@ -1,6 +1,5 @@
-package auth
+package com.wgtwo.auth
 
-import com.wgtwo.auth.WgtwoAuth
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
