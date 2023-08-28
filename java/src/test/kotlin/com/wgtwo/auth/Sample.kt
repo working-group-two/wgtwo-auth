@@ -1,8 +1,7 @@
-package auth
+package com.wgtwo.auth
 
 import com.wgtwo.api.v1.sms.SmsProto.SendTextToSubscriberRequest
 import com.wgtwo.api.v1.sms.SmsServiceGrpc
-import com.wgtwo.auth.WgtwoAuth
 import io.grpc.ManagedChannelBuilder
 
 private val clientId = System.getenv("CLIENT_ID")

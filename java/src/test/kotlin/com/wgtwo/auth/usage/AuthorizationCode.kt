@@ -1,4 +1,4 @@
-package auth.usage
+package com.wgtwo.auth.usage
 
 import com.wgtwo.auth.Prompt
 import com.wgtwo.auth.model.Token

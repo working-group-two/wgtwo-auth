@@ -33,7 +33,7 @@ public class ClientCredentialSource {
     }
 
     public BearerTokenCallCredentials callCredentials() {
-        return new BearerTokenCallCredentials(fetchToken()::getAccessToken);
+        return new BearerTokenCallCredentials(() -> fetchToken().getAccessToken());
     }
 
     private boolean isExpired(Token token) {
